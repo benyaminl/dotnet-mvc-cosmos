@@ -1,0 +1,19 @@
+@model coba.Models.Request.ContactRequest
+@{
+    ViewData["Title"] = "Contact US";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Please Fill the Form here</h1>
+    <form method="post" asp-action="Contact" asp-controller="Home">
+        <label>Name</label>
+        <input type="text" class="form-control" name="name" asp-for="Name">
+        <span asp-validation-for="Name" class="text-danger"></span> <br>
+        <label>Email</label>
+        <input type="email" class="form-control" name="email" asp-for="Email">
+        <span asp-validation-for="Email" class="text-danger"></span> <br>
+        <label>Message</label>
+        <textarea name="message" class="form-control" cols="30" rows="10"></textarea>
+        <button class="btn btn-primary" type="submit">Send</button>
+    </form>
+</div>
