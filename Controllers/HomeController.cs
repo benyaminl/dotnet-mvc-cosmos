@@ -54,6 +54,12 @@ public class HomeController : Controller
         return View("/Views/Home/ContactResult.cshtml", body);
     }
 
+    public async Task<IActionResult> ContactList()
+    {
+        var data = await _repo.GetListMessageAsync("SELECT * FROM contact");
+        return View("/Views/Home/ContactList.cshtml", data);
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
