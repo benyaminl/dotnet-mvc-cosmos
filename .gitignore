@@ -1,6 +1,9 @@
 # Adding settings json 
 appsettings.json
 appsettings.Development.json
+# Unit Test Coverage Exclude 
+coveragereport/
+*.cobertura.xml
 
 # @see https://stackoverflow.com/questions/39289765/whats-the-common-practice-of-gitignore-for-aspnet-core-project
 ## Ignore Visual Studio temporary files, build results, and
