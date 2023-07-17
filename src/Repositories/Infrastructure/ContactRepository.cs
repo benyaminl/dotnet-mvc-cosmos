@@ -38,7 +38,7 @@ public class ContactRepository : IContactRepository
         return results;
     }
 
-    public async Task<ContactMessage> GetMessageAsync(string id)
+    public async Task<ContactMessage?> GetMessageAsync(string id)
     {
         try 
         {
@@ -55,6 +55,6 @@ public class ContactRepository : IContactRepository
     {
         var obj = JsonSerializer.Serialize(msg);
         var result = await _container.CreateItemAsync<ContactMessage>(msg, new PartitionKey(msg.Id));
-        var code = result.StatusCode;
+        Console.WriteLine(result.StatusCode.ToString());
     }
 }

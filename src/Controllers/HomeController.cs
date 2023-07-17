@@ -54,6 +54,19 @@ public class HomeController : Controller
         return View("/Views/Home/ContactResult.cshtml", body);
     }
 
+    [HttpPost("/Home/Contact/{id}")]
+    public async Task<IActionResult> ContactDelete(string id)
+    {
+        var result = _repo.GetMessageAsync(id);
+
+        if (result == null)
+            return NotFound();
+
+        await _repo.DeleteMessage(id);
+
+        return Redirect("/Home/ContactList");
+    }
+
     public async Task<IActionResult> ContactList()
     {
         var data = await _repo.GetListMessageAsync("SELECT * FROM contact");
