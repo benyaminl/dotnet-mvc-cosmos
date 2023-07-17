@@ -79,4 +79,30 @@ public class ContactRepoTest
         
         Assert.True(newData.Count > oldCount, "New data should be larger than old data");
     }
+
+    [Fact]
+    public async void DeleteContactMsg_Test()
+    {
+        var data = await GetContactList();
+
+        var fakeContactRepo = new Mock<IContactRepository>();
+        
+        fakeContactRepo
+            .Setup(d => d.GetListMessageAsync(It.IsAny<string>()))
+            .Returns(() => Task.FromResult(data));
+        
+        var oldData = await fakeContactRepo.Object.GetListMessageAsync("");
+        int oldCount = oldData.Count;
+
+        fakeContactRepo
+            .Setup(d => d.DeleteMessage(It.IsAny<string>()))
+            .Callback((string Id) => {
+                int index = data.FindIndex(d => d.Id == Id);
+                data.RemoveAt(index);
+            });
+
+        await fakeContactRepo.Object.DeleteMessage("2");
+
+        Assert.True(data.Count < oldCount, "Data should be lower than old data");
+    }
 }
